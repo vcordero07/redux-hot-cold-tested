@@ -1,13 +1,13 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {makeGuess} from '../actions';
-import './guess.css';
+import React from "react";
+import { connect } from "react-redux";
+import { makeGuess } from "../actions";
+import "./guess.css";
 
-export class GuessForm extends React.Component{
+export class GuessForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: ''
+      inputValue: ""
     };
   }
   onSubmit(event) {
@@ -15,51 +15,51 @@ export class GuessForm extends React.Component{
     this.props.dispatch(makeGuess(this.state.inputValue));
 
     this.setState({
-      inputValue: ''
-    })
-
+      inputValue: ""
+    });
   }
   _onChange = e => {
     const value = e.target.value;
     this.setState({
       inputValue: value
-    })
-  }
+    });
+  };
 
   render() {
     return (
-        <form onSubmit={e => this.onSubmit(e)}>
-          <input
-            type="number"
-            min="1"
-            max="100"
-            name="userGuess"
-            id="userGuess"
-            className="text"
-            autoComplete="off"
-            aria-labelledby="feedback"
-            value={this.state.inputValue}
-            onChange={this._onChange}
-            required
-            disabled={this.props.btnDisabled}
-            />
-          <button
-            type="submit"
-            name="submit"
-            id="guessButton"
-            className="button"
-            disabled={this.props.btnDisabled}
-            >Guess
-          </button>
-        </form>
+      <form onSubmit={e => this.onSubmit(e)}>
+        <input
+          type="number"
+          min="1"
+          max="100"
+          name="userGuess"
+          id="userGuess"
+          className="text"
+          autoComplete="off"
+          aria-labelledby="feedback"
+          value={this.state.inputValue}
+          onChange={this._onChange}
+          required
+          disabled={this.props.btnDisabled}
+        />
+        <button
+          type="submit"
+          name="submit"
+          id="guessButton"
+          className="button"
+          disabled={this.props.btnDisabled}
+        >
+          Guess
+        </button>
+      </form>
     );
   }
 }
 
-const mapStatetoProps = (state) => {
+const mapStatetoProps = state => {
   return {
-    btnDisabled: !!(state.guesses.find(guess => guess === state.answer)) //Boolean(state.guesses.find(guess => guess === state.answer))
-  }
-}
+    btnDisabled: !!state.guesses.find(guess => guess === state.answer) //Boolean(state.guesses.find(guess => guess === state.answer))
+  };
+};
 
 export default connect(mapStatetoProps)(GuessForm);

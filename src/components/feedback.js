@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import './feedback.css';
+import "./feedback.css";
 
 export default function FeedbackSection(props) {
   return (
-    <section id="feedback" >
-
+    <section id="feedback">
       <ul id="guess-list">
         <li>{props.guessList}</li>
       </ul>
